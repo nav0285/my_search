@@ -1,0 +1,29 @@
+<%= form_tag('/search', method: :get) do %>
+
+    <%= text_field_tag 'q', nil, placeholder: 'Enter search' %>
+    <%= submit_tag("Search") %>
+
+<% end %>
+
+<%= form_tag('/search/facebook', method: :get) do %>
+    <%= submit_tag("Facebook") %> 
+<% end %> 
+
+<%= form_tag('/search/twitter', method: :get) do %>
+    <%= submit_tag("Twitter") %> 
+<% end %> 
+
+<%= form_tag('/search/linkedin', method: :get) do %>
+    <%= submit_tag("Linkedin") %> 
+<% end %> 
+
+<ul><% @doc.xpath('//li//div//a[@href]').each do |li| %>
+		
+ <li><%= link_to li.content, li[:href] %></br>
+ 	 <%= li[:href] %></li>
+
+<% end %></ul>
+
+
+
+    

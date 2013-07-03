@@ -1,0 +1,9 @@
+
+
+<%= form_tag('/search', method: :get) do %>
+
+    <%= text_field_tag 'q', nil, placeholder: 'Enter search', size: 30 %>
+    <%= submit_tag("Search") %>
+
+<% end %>
+

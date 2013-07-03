@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySearch</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <style>
+    a.heading{
+    	color :red;
+    	text-decoration :none;
+    }
+  </style>  
+</head>
+<body>
+<h2><a class="heading", href='http://localhost:3000'>MySearch.com</a></h2>
+<%= yield %>
+
+</body>
+</html>

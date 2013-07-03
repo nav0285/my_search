@@ -1,0 +1,25 @@
+class SearchController < ApplicationController
+   
+ require 'httparty'  
+
+ def index
+    @name=params[:q]
+    @name.gsub!(' ','+')  
+    session[:nam] = @name 
+    @doc = HTTParty.get("http://www.google.com/search?q=facebook+twitter+linkedin+#{session[:nam]}")
+    @facebook = HTTParty.get("http://www.google.com/search?q=facebook+#{session[:nam]}")
+    @@redis.set("facebook:#{session[:nam]}","#{@facebook}")
+    @twitter = HTTParty.get("http://www.google.com/search?q=twitter+#{session[:nam]}")
+    @@redis.set("twitter:#{session[:nam]}","#{@twitter}")
+    @linkedin = HTTParty.get("http://www.google.com/search?q=linkedin+#{session[:nam]}")
+    @@redis.set("linkedin:#{session[:nam]}","#{@linkedin}")
+
+  end
+
+ def facebook
+   @doc2 = @@redis.get("facebook:#{session[:nam]}")  
+ end
+
+ 
+
+end
