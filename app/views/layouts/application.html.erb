@@ -10,9 +10,15 @@
     	color :red;
     	text-decoration :none;
     }
+    p.error{
+    	color :white;
+    	background-color: red;
+    	font-size: 30px;
+    }
   </style>  
 </head>
 <body>
+<p class="error"><%= flash[:error] if flash[:error].present? %></p>
 <h2><a class="heading", href='http://localhost:3000'>MySearch.com</a></h2>
 <%= yield %>
 

@@ -4,6 +4,7 @@ class SearchController < ApplicationController
     @name=params[:q]
     @name.gsub!(' ','+')  
     session[:name] = @name 
+    begin
     @facebook = HTTParty.get("http://www.bing.com/search?q=#{session[:name]}%3Afacebook")
     @@redis.set("facebook:#{session[:name]}","#{@facebook}")
     @twitter = HTTParty.get("http://www.bing.com/search?q=#{session[:name]}%3Atwitter")
@@ -12,6 +13,10 @@ class SearchController < ApplicationController
     @@redis.set("linkedin:#{session[:name]}","#{@linkedin}")
     @@redis.set("#{session[:name]}","#{@twitter}+#{@facebook}+#{@linkedin}")
     @doc = Nokogiri::HTML(@@redis.get("#{session[:name]}"))
+    rescue SocketError 
+      flash.now[:error] = 'Socket Error: No Internet Connection'
+      render :search_item
+    end  
   end
 
  def facebook
