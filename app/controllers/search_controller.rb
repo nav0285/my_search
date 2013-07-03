@@ -1,6 +1,4 @@
-class SearchController < ApplicationController
-   
- require 'httparty'  
+class SearchController < ApplicationController 
 
  def index
     @name=params[:q]
